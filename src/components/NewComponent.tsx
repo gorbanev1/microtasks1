@@ -11,9 +11,9 @@ export const NewComponent = ({students}) => {
     return (
         <ul>
             {students.map((student)=>{
-               return <li>
+               return <li key={student.id}>
                    <span>{student.name},</span>
-                    <span>{student.age}</span>
+                    <span>age: {student.age}</span>
                 </li>
             })}
 

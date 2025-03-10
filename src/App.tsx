@@ -1,6 +1,7 @@
-import { useState } from 'react'
+import {useState, MouseEvent} from 'react'
 import {NewComponent} from "./components/NewComponent";
 import './App.css'
+import {Button} from "./components/Button";
 
 function App() {
     const [students, setStudents] = useState([
@@ -17,8 +18,26 @@ function App() {
             {id: 11, name: "Christopher", age: 100},
         ]
     )
-    return (
-        <NewComponent students={students}/>
+
+    const myFirstSubscriber = (name: string) => {
+        console.log(name)
+    }
+    const button1Foo=(subscriber:string, age:number)=>{
+        console.log(subscriber, age)
+
+    }
+    const button2Foo=(subscriber:string)=>{
+        console.log(subscriber)
+
+    }
+    return (<>
+            <NewComponent students={students}/>
+            <Button callBack={()=>{button1Foo("hui", 2)}} name={"hui"}/>
+            <Button callBack={()=> {
+                button2Foo("hhhh")
+            }} name={"pizda"}/>
+            <button onClick={(event) => myFirstSubscriber("daDAD")}>Button</button>
+        </>
     );
 }
 
