@@ -30,6 +30,15 @@ function App() {
         console.log(subscriber)
 
     }
+    let[a,setA]=useState(1)
+
+    const onClickHandler=()=>{
+        setA(++a)
+        console.log(a)
+    }
+    const onClickHandler2=()=>{
+        setA(0)
+    }
     return (<>
             <NewComponent students={students}/>
             <Button callBack={()=>{button1Foo("hui", 2)}} name={"hui"}/>
@@ -37,6 +46,9 @@ function App() {
                 button2Foo("hhhh")
             }} name={"pizda"}/>
             <button onClick={(event) => myFirstSubscriber("daDAD")}>Button</button>
+            <h1>{a}</h1>
+            <Button callBack={onClickHandler} name={"adssdas"}>adasd</Button>
+            <Button callBack={onClickHandler2} name={"adssdas"}>0</Button>
         </>
     );
 }
