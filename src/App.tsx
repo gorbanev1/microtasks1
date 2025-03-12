@@ -22,21 +22,21 @@ function App() {
     const myFirstSubscriber = (name: string) => {
         console.log(name)
     }
-    const button1Foo=(subscriber:string, age:number)=>{
+    const button1Foo = (subscriber: string, age: number) => {
         console.log(subscriber, age)
 
     }
-    const button2Foo=(subscriber:string)=>{
+    const button2Foo = (subscriber: string) => {
         console.log(subscriber)
 
     }
-    let[a,setA]=useState(1)
+    let [a, setA] = useState(1)
 
-    const onClickHandler=()=>{
+    const onClickHandler = () => {
         setA(++a)
         console.log(a)
     }
-    const onClickHandler2=()=>{
+    const onClickHandler2 = () => {
         setA(0)
     }
 
@@ -50,11 +50,24 @@ function App() {
         {banknote: "dollar", nominal: 50, number: "j123456789"},
         {banknote: "ruble", nominal: 50, number: "h123456789"}
     ])
+    type FilterType = 'all'|"dollar"|'ruble'
+    const [currentMoney, setCurrentMoney] = useState(money)
+    // let currentMoney = money.filter((filteredMoney) => filteredMoney.banknote == "ruble")
 
+    const onClickFilterHandler=(name:FilterType, money)=>{
+        console.log(name)
+        setCurrentMoney(money.filter((filteredMoney)=>filteredMoney.banknote==name))
+        if (name=="al") {
+
+            setCurrentMoney(money)
+        }
+    }
     return (<>
             <NewComponent students={students}/>
-            <Button callBack={()=>{button1Foo("hui", 2)}} name={"hui"}/>
-            <Button callBack={()=> {
+            <Button callBack={() => {
+                button1Foo("hui", 2)
+            }} name={"hui"}/>
+            <Button callBack={() => {
                 button2Foo("hhhh")
             }} name={"pizda"}/>
             <button onClick={(event) => myFirstSubscriber("daDAD")}>Button</button>
@@ -63,8 +76,8 @@ function App() {
             <Button callBack={onClickHandler2} name={"adssdas"}>0</Button>
 
             <ul>
-                {money.map((objFromMoneyArr) => {
-                    return(
+                {currentMoney.map((objFromMoneyArr) => {
+                    return (
                         <li>
                             <span>{objFromMoneyArr.banknote}</span>
                             <span>{objFromMoneyArr.nominal}</span>
@@ -73,7 +86,11 @@ function App() {
                     )
                 })}
             </ul>
-
+            <div>
+                <button onClick={()=>{onClickFilterHandler("all", money)}}>all</button>
+                <button onClick={()=>{onClickFilterHandler("ruble",money )}}>ruble</button>
+                <button onClick={()=>{onClickFilterHandler("dollar", money)}}>dollar</button>
+            </div>
         </>
     );
 }
